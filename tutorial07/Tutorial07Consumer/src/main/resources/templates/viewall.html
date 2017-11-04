@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/fragment :: title">
+        <title>View All Students</title>
+    </head>
+    <body>
+    	<div th:replace="fragments/fragment :: header"></div>
+        <h1>All Students</h1>
+    	<table id="student_table" class="table table-responsive table-hover">
+	       <thead>
+	       		<tr>
+		       		<th>No</th>
+	                <th>NPM</th>
+	                <th>Name</th>
+	                <th>GPA</th>
+	                <th>Predikat</th>
+	                <th>Update</th>
+	                <th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student,iterationStatus: ${students}">
+			       	<td th:text="${iterationStatus.count}">No.</td>
+			       	<td th:text="${student.npm}">Student NPM</td>
+			       	<td th:text="${student.name}">Student Name</td>
+			       	<td th:text="${student.gpa}">Student GPA</td>
+			       	<td th:text="${student.gpa>=3.49} ? 'Cum Laude!' : 'Sangat Memuaskan!'"></td>
+					<td><a th:href="'/student/update/' +  ${student.npm}">Update</a></td>
+			       	<td><a th:href="'/student/delete/' +  ${student.npm}">Delete</a></td>
+			    </tr>
+			</tbody>
+       	</table>
+       	<div th:replace="fragments/fragment :: footer"></div>
+    </body>
+    <script>
+	    $(document).ready(function(){
+	        $('#student_table').dataTable();
+	    });
+   	</script>
+    
+</html>
